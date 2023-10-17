@@ -1,6 +1,7 @@
 package DesignPatterns.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Optional;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,13 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import DesignPatterns.model.Cliente;
 import DesignPatterns.service.ClienteService;
-import feign.Response;
 
 @RestController
 @RequestMapping("clientes")
 public class ClienteRestController {
     
-    @Autowired
     private ClienteService clienteService;
 
     @GetMapping
@@ -28,7 +27,7 @@ public class ClienteRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cliente> buscarPorId(@PathVariable Long id){
+    public ResponseEntity<Optional<Cliente>> buscarPorId(@PathVariable Long id){
         return ResponseEntity.ok(clienteService.buscarPorId(id));
     }
 
